@@ -14,6 +14,6 @@ An infamous project for ALX, gatekeeped by Kimba and testy even to the best of u
 <br />
 
 #### Advanced
-- I don't know
+- I don't know yet
 <br />
 ...
