@@ -24,9 +24,11 @@ char *find_path(char *command)
 		return (NULL);
 	}
 
+	printf("PATH: %s\n", getenv("PATH"));
 	token = strtok(path, ":");
 	while (token != NULL)
 	{
+		printf("Trying path: %s\n", full_path);
 		full_path = build_path(token, command);
 		if (access(full_path, X_OK) == 0)
 		{

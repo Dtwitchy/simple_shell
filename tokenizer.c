@@ -1,46 +1,35 @@
-#include "main.h"
+#include "shell_version_two.h"
 
 /**
- * tokenizer - to tokenize input with or like strtok
- * @input: the input read from stdin with getline
- * Return: an array of arguments
+ * tokenizer - tokenize the input command
+ * @input: the input command
+ * Return: array of tokens
  */
 char **tokenizer(char *input)
 {
+	char **tokens = malloc(10 * sizeof(char *));
 	char *token;
-	char **token_array = malloc(MAX_NUM_ARGUMENTS * sizeof(char *));
-	int i = 0;
+	int token_count = 0;
 
-	/* Check if the token array was properly assigned required memory */
-	if (token_array == NULL)
+	if (tokens == NULL)
 	{
-		perror("malloc");
+		perror("Memory allocation error");
 		exit(EXIT_FAILURE);
 	}
 
-	/* Using strtok, we tokenize the input based on space, tabs and newlines */
-	token = strtok(input, " \t\n");
-
-	/* Duplicate the token we got */
+	token = strtok(input, " ");
 	while (token != NULL)
 	{
-		token_array[i] = strdup(token);
-		if (token_array[i] == NULL)
+		tokens[token_count++] = strdup(token);
+		if (tokens[token_count - 1] == NULL)
 		{
-			perror("strdup");
+			perror("Memory allocation error");
 			exit(EXIT_FAILURE);
 		}
-		i++;
-
-		/* If more than 64 arguments, print error, then next token */
-		if (i >= MAX_NUM_ARGUMENTS - 1)
-		{
-			fprintf(stderr, "Too many arguments\n");
-			exit(EXIT_FAILURE);
-		}
-
-		token = strtok(NULL, " \t\n");
+		token = strtok(NULL, " ");
 	}
-	token_array[i] = NULL; /* NULL-terminate */
-	return (token_array);
+
+	tokens[token_count] = NULL;
+	return (tokens);
 }
+

@@ -1,46 +1,36 @@
-#include "main.h"
+#include "shell_version_two.h"
 
 /**
- * execute - to execute the commands recieved as input
- * @tokenized_command: the array of arguments
- * @arguments: the arguments included
- * Return: 0 for success or -1 for fail
+ * execute - execute shell commands
+ * @command: the command to execute
+ * @arguments: array of arguments for the command
+ * @envp: array of environment variables
+ * Return: success or failure code
  */
-int execute(char *tokenized_command, char **arguments)
+int execute(char *command, char *arguments[], char *envp[])
 {
 	pid_t new_process;
 	int status;
-	char *full_path = find_path(tokenized_command);
 
-	if (full_path != NULL)
+	new_process = fork();
+
+	if (new_process == 0)
 	{
-		new_process = fork();
-
-		if (new_process == 0)
+		if (execve(command, arguments, envp) == -1)
 		{
-			if (execve(full_path, arguments, environ) == -1)
-			{
-				perror("execve");
-				exit(EXIT_FAILURE);
-			}
-		}
-		else if (new_process < 0)
-		{
-			perror("fork");
-			free(full_path);
-			return (-1);
-		}
-		else
-		{
-			waitpid(new_process, &status, WUNTRACED);
-			free(full_path);
+			fprintf(stderr, "./hsh: %s: command not found\n", command);
+			exit(EXIT_FAILURE);
 		}
 	}
+	else if (new_process < 0)
+		perror("fork");
 	else
 	{
-		fprintf(stderr, "Command '%s' not found\n", tokenized_command);
-		return (-1);
-	}
+		waitpid(new_process, &status, 0);
+		if (WIFEXITED(status))
+			return (WEXITSTATUS(status));
 
-	return (0);
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_FAILURE);
 }
