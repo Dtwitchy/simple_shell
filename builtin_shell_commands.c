@@ -57,10 +57,10 @@ int builtin_env(char *command, char **environ)
 }
 
 /**
- * handle_var - checks and executes built-in commands
- * @command: the command
- * @arguments: flipping not
- * @cmd_status: array of environment variables
+ * handle_var - checks and executes built-in commands.
+ * @command: the command.
+ * @arguments: flipping not.
+ * @cmd_status: array of environment variables.
  * @pid: pid as said;
  * Return: void as in none
  */
