@@ -24,6 +24,7 @@ char **tokenizer(char *input);
 int handle_var(char *command, char *arguments[], int cmd_status, int pid);
 int builtin_exit(char *command, char *arguments[], int cmd_status);
 int builtin_env(char *command, char **environ);
+void get_coc(int singh);
 
 /* External Variables Needed */
 extern char **environ;
