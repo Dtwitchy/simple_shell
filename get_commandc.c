@@ -1,4 +1,4 @@
-include "main.h"
+include "shell_version_two.h"
 
 /**
  * get_coc - Handle the crtl + c call in prompt

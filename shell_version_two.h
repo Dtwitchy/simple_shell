@@ -25,6 +25,8 @@ int handle_var(char *command, char *arguments[], int cmd_status, int pid);
 int builtin_exit(char *command, char *arguments[], int cmd_status);
 int builtin_env(char *command, char **environ);
 void get_coc(int singh);
+ssize_t my_getlinef(char *lineptr, size_t *n,File *stream);
+void bring_line(char *lineptr, size_t *n, char *buff, size_t g);
 
 /* External Variables Needed */
 extern char **environ;
