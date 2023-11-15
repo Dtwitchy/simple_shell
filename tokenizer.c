@@ -1,9 +1,9 @@
 #include "shell_version_two.h"
 
 /**
- * tokenizer - tokenize the input command
- * @input: the input command
- * Return: array of tokens
+ * tokenizer - tokenize the input command.
+ * @input: the input command.
+ * Return: array of tokens.
  */
 char **tokenizer(char *input)
 {
@@ -32,4 +32,3 @@ char **tokenizer(char *input)
 	tokens[token_count] = NULL;
 	return (tokens);
 }
-
