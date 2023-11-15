@@ -1,8 +1,8 @@
 #include "shell_version_two.h"
 
 /**
- * execute - execute shell commands
- * @command: the command to execute
+ * execute - execute shell commands.
+ * @command: the command to execute.
  * @arguments: array of arguments for the command
  * @envp: array of environment variables
  * Return: success or failure code
