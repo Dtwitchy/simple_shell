@@ -9,4 +9,7 @@
  */
 ssize_t my_getlinef(char *lineptr, size_t *n,File *stream)
 {
+	int i;
+	sssize_t input;
+	ssize_t 
 }
