@@ -6,7 +6,7 @@
  */
 int main(void)
 {
-	char *read_input, **arguments;
+	char *read_input = NULL, **arguments;
 	ssize_t getline_result;
 	size_t len = 0;
 	int i, multiline = 0, cmd_status = 0;
