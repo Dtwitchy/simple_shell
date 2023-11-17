@@ -15,7 +15,7 @@ int main(void)
 	{
 		if (!multiline)
 			fflush(stdout);
-		getline_result = getline(&read_input, &len, stdin);
+		getline_result = input(&read_input, &len, stdin);
 		if (getline_result == -1)
 		{
 			if (feof(stdin))
@@ -26,10 +26,7 @@ int main(void)
 		remove_newline(read_input);
 		trim_whitespace(read_input);
 		if (read_input[0] == '\0')
-		{
 			multiline = 1;
-			continue;
-		}
 		else
 			multiline = 0;
 		arguments = tokenizer(read_input);
@@ -39,7 +36,8 @@ int main(void)
 			return (cmd_status);
 		}
 		cmd_status = execute(arguments[0], arguments, environ);
-
+		if (cmd_status == 127)
+			return (127);
 		for (i = 0; arguments[i] != NULL; i++)
 			free(arguments[i]);
 		free(arguments);

@@ -19,13 +19,14 @@
 
 /* Prototypes */
 int execute(char *command, char *arguments[], char *envp[]);
+int process(char *command, char *arguments[], char *envp[], int prepend);
 void remove_newline(char *command);
 void trim_whitespace(char *command);
 char **tokenizer(char *input);
 int handle_var(char *command, char *arguments[], int cmd_status, int pid);
 int builtin_exit(char *command, char *arguments[], int cmd_status);
 int builtin_env(char *command, char **environ);
-ssize_t my_getlinef(char *lineptr, size_t *n, FILE *stream);
+ssize_t input(char **lineptr, size_t *n, FILE *stream);
 
 /* External Variables Needed */
 extern char **environ;
