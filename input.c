@@ -9,12 +9,13 @@
  */
 ssize_t input(char **lineptr, size_t *n, FILE *stream)
 {
-	size_t i = 0;
+	size_t i = 0, j;
 	int c;
+	char *temp;
 
 	if (*lineptr == NULL || *n == 0)
 	{
-		*n = BUFFER;
+		*n = 4;
 		*lineptr = (char *)malloc(*n);
 		if (*lineptr == NULL)
 		{
@@ -25,12 +26,26 @@ ssize_t input(char **lineptr, size_t *n, FILE *stream)
 
 	while ((c = fgetc(stream)) != EOF && c != '\n')
 	{
+		if (i == *n - 1)
+		{
+			*n *= 2;
+			temp = (char *)malloc(*n);
+
+			if (temp == NULL)
+			{
+				perror("malloc");
+				free(*lineptr);
+				return (-1);
+			}
+			for (j = 0; j < i; ++j)
+				temp[j] = (*lineptr)[j];
+			free(*lineptr);
+			*lineptr = temp;
+		}
 		(*lineptr)[i++] = (char)c;
 	}
 	(*lineptr)[i] = '\0';
-
 	if (c == EOF && i == 0)
 		return (-1);
-
 	return (i);
 }
