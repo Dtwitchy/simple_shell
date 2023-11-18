@@ -39,6 +39,7 @@ char *resize(char *ptr, size_t size);
 char *construct_full_command(const char *path, const char *command);
 
 /* New From Destiny */
+/**
 void cd_pad(data_cmd *datacd);
 void cd_to(data_cmd *datacd);
 void cd_prvsd(data_cmd *datacd);
@@ -48,6 +49,7 @@ void cd_pad(data_cmd *datacd);
 void cd_to(data_cmd *datacd);
 void cd_prvsd(data_cmd *datacd);
 void cd_to_home(data_cmd *datacd);
+*/
 
 /* External Variables Needed */
 extern char **environ;
