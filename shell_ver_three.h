@@ -44,7 +44,7 @@ void cd_pad(data_cmd *datacd);
 void cd_to(data_cmd *datacd);
 void cd_prvsd(data_cmd *datacd);
 void cd_to_home(data_cmd *datacd);
-int cd_current(data_cmd *datacd);
+int cd_cmd(data_cmd *datacd);
 void cd_pad(data_cmd *datacd);
 void cd_to(data_cmd *datacd);
 void cd_prvsd(data_cmd *datacd);

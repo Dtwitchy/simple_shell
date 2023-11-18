@@ -1,12 +1,12 @@
 #include "shell_version_two.h”
 
 /**
- * cd_current - change current directory 
+ * cd_cmd - change current directory 
  *
  * @datacd: relevant data
  * Return: 1 (success)
  */
-int cd_current(data_cmd *datacd)
+int cd_cmd(data_cmd *datacd)
 {
 	char *d;
 	int r, k, i;
@@ -42,4 +42,3 @@ int cd_current(data_cmd *datacd)
 
 	return (1);
 }
-
