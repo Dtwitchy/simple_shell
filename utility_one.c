@@ -1,4 +1,36 @@
-#include "shell_version_two.h"
+#include "shell_ver_three.h"
+
+/**
+ * resize - custom realloc function
+ * @ptr: pointer to initial allocation
+ * @size: the new size to allocate
+ * Return: pointer to the new allocation
+ */
+char *resize(char *ptr, size_t size)
+{
+	char *new_ptr = (char *)malloc(size);
+
+	if (new_ptr == NULL)
+		return (NULL);
+	strcpy(new_ptr, ptr);
+	free(ptr);
+	return (new_ptr);
+}
+
+/**
+ * length - find the length of a string
+ * @str: the string to count
+ * Return: lenght of the string
+ */
+size_t length(const char *str)
+{
+	size_t len = 0;
+
+	while (str[len] != '\0')
+		len++;
+
+	return (len);
+}
 
 /**
  * trim_whitespace - removes leading and trailing whitespace from a string

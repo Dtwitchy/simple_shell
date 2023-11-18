@@ -1,51 +1,41 @@
-#include "shell_version_two.h"
+#include "shell_ver_three.h"
 
 /**
- * input - my own getline
+ * input - the custom getline function
  * @lineptr: the line to read into
- * @n: the size of the file
- * @stream: where to read from
- * Return: as it should
+ * @size: the size of the input
+ * @stream: where to read input from
+ * Return: 0 for success
  */
-ssize_t input(char **lineptr, size_t *n, FILE *stream)
+ssize_t input(char **lineptr, size_t *size, FILE *stream)
 {
-	size_t i = 0, j;
-	int c;
-	char *temp;
+	size_t i = 0;
+	int ASCII;
 
-	if (*lineptr == NULL || *n == 0)
+	if (!lineptr || !size || !stream)
+		return (-1); /* Invalid input parameters */
+
+	/* Allocate initial buffer if needed */
+	if (*lineptr == NULL)
 	{
-		*n = 4;
-		*lineptr = (char *)malloc(*n);
+		*lineptr = malloc(sizeof(char *) * BUFFER);
 		if (*lineptr == NULL)
-		{
-			perror("malloc");
 			return (-1);
-		}
+		*size = BUFFER;
 	}
 
-	while ((c = fgetc(stream)) != EOF && c != '\n')
+	/* Read until we enounter a newline or EOF */
+	while ((ASCII = getc(stream)) != EOF && ASCII != '\n')
 	{
-		if (i == *n - 1)
+		if (i >= *size - 1) /* Resizing the BUFFER as needed */
 		{
-			*n *= 2;
-			temp = (char *)malloc(*n);
-
-			if (temp == NULL)
-			{
-				perror("malloc");
-				free(*lineptr);
+			*size *= 2; /* Multiply current BUFFER by two */
+			*lineptr = realloc(*lineptr, *size);
+			if (*lineptr == NULL)
 				return (-1);
-			}
-			for (j = 0; j < i; ++j)
-				temp[j] = (*lineptr)[j];
-			free(*lineptr);
-			*lineptr = temp;
 		}
-		(*lineptr)[i++] = (char)c;
+		(*lineptr)[i++] = (char)ASCII; /* Convert ASCII to char */
 	}
 	(*lineptr)[i] = '\0';
-	if (c == EOF && i == 0)
-		return (-1);
 	return (i);
 }
