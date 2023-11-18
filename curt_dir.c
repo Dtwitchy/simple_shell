@@ -6,7 +6,7 @@
  * @datacd: relevant data
  * Return: 1 (success)
  */
-int cd_current(data_shell *datacd)
+int cd_current(data_cmd *datacd)
 {
 	char *d;
 	int r, k, i;

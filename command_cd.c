@@ -133,7 +133,7 @@ void cd_prvsd(data_cmd *datacd)
  * @datacd: relevant data
  * Return: none
  */
-void cd_to_home(data_shell *datacd)
+void cd_to_home(data_cmd *datacd)
 {
 	char *pointer_pwd, *home;
 	char pwd[PATH_MAX];

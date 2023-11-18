@@ -27,6 +27,13 @@ int handle_var(char *command, char *arguments[], int cmd_status, int pid);
 int builtin_exit(char *command, char *arguments[], int cmd_status);
 int builtin_env(char *command, char **environ);
 ssize_t input(char **lineptr, size_t *n, FILE *stream);
+void cd_pad(data_cmd *datacd);
+void cd_to(data_cmd *datacd);
+void cd_prvsd(data_cmd *datacd);
+void cd_to_home(data_cmd *datacd);
+int cd_current(data_cmd *datacd);
+
+
 
 /* External Variables Needed */
 extern char **environ;
