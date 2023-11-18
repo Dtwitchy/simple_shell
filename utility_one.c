@@ -38,18 +38,23 @@ size_t length(const char *str)
  */
 void trim_whitespace(char *str)
 {
-	size_t len = strlen(str);
+	size_t len;
 	size_t start = 0;
-	size_t end = len - 1;
+	size_t end;
 
-	while (isspace((unsigned char)str[start]))
-		start++;
+	if (str != NULL)
+	{
+		len = strlen(str);
+		end = len - 1;
+		while (isspace((unsigned char)str[start]))
+			start++;
 
-	while (end > start && isspace((unsigned char)str[end]))
-		end--;
+		while (end > start && isspace((unsigned char)str[end]))
+			end--;
 
-	memmove(str, str + start, end - start + 1);
-	str[end - start + 1] = '\0';
+		memmove(str, str + start, end - start + 1);
+		str[end - start + 1] = '\0';
+	}
 }
 
 /**
@@ -58,8 +63,13 @@ void trim_whitespace(char *str)
  */
 void remove_newline(char *str)
 {
-	size_t len = strlen(str);
+	size_t len;
 
-	if (len > 0 && str[len - 1] == '\n')
-		str[len - 1] = '\0';
+	if (str != NULL)
+	{
+		len = strlen(str);
+
+		if (len > 0 && str[len - 1] == '\n')
+			str[len - 1] = '\0';
+	}
 }

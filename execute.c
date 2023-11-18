@@ -1,36 +1,38 @@
 #include "shell_ver_three.h"
 
 /**
- * execute - to execute commands recieved
- * @command: the command recieved
+ * execute - execute shell commands.
+ * @command: the command to execute.
  * @arguments: array of arguments for the command
  * @envp: the environment variables
- * Return: status information
+ * Return: success or failure code
  */
 int execute(char *command, char *arguments[], char *envp[])
 {
-	int status;
-	pid_t new = fork();
 
-	if (new == -1)
-	{
-		perror("fork");
-		return (EXIT_FAILURE);
-	}
-	if (new == 0)
+	pid_t new_process;
+	int status;
+
+	new_process = fork();
+
+	if (new_process == 0)
 	{
 		if (execve(command, arguments, envp) == -1)
 		{
 			fprintf(stderr, "./hsh: 1: %s: not found\n", command);
-			return (EXIT_FAILURE);
+			exit(EXIT_FAILURE);
 		}
+	}
+	else if (new_process < 0)
+	{
+		perror("fork");
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
-		waitpid(new, &status, 0);
+		waitpid(new_process, &status, 0);
 		if (WIFEXITED(status))
 			return (WEXITSTATUS(status));
-
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_FAILURE);
