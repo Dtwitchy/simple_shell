@@ -41,7 +41,20 @@ void cd_pad(data_cmd *datacd);
 void cd_to(data_cmd *datacd);
 void cd_prvsd(data_cmd *datacd);
 void cd_to_home(data_cmd *datacd);
-int cd_current(data_cmd *datacd);
+int cd_cmd(data_cmd *datacd);
+char *_strdup(const char *r);
+int _strlen(const char *r);
+int cmp_chars(char str[], const char *divid);
+char *_strtok(char str[], const char *divid);
+int _isdigit(const char *r);
+char *_strcat(char *targ, const char *mk);
+char *_strcpy(char *targ, char *mk);
+int _strcmp(char *r1, char *r2);
+char *_strchr(char *r, char c);
+int _strspn(char *r, char *accept);
+void rev_string(char *r);
+
+
 void cd_pad(data_cmd *datacd);
 void cd_to(data_cmd *datacd);
 void cd_prvsd(data_cmd *datacd);
